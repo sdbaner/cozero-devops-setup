@@ -18,6 +18,10 @@ on:
         description: "Specify the Terraform action: apply or destroy"
         required: true
         default: "apply"
+        type: choice
+        options:
+          - approve
+          - destroy
       environment:
         description: "Specify the environment"
         required: true
