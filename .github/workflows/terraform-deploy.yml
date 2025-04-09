@@ -68,15 +68,10 @@ jobs:
     - name: Setup Terraform Backend
       id: backend
       run: cat ../../${{ github.event.inputs.stack }}.backend.tf > backend.conf
-    
-    - name: Terraform Init
-      run: terraform init -backend-config=backend.conf
 
     - name: Initialize Terraform
       id: init
-      run: |
-         pwd
-         terraform init -input=false -backend-config=backend.conf
+      run: terraform init -input=false -backend-config=backend.conf
       
 
     - name: Validate Terraform
