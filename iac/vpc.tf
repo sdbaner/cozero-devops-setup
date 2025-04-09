@@ -16,15 +16,12 @@ module "vpc" {
     Terraform                                     = "true"
     Environment                                   = var.environment
     Project                                       = var.project
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"    
   }
   public_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/elb"                      = "1"
+    resource = "shared"
   }
   private_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/elb"                      = "1"
+    resource = "shared"
   }
 
 }
