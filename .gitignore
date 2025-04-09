@@ -1,0 +1,17 @@
+# Terraform state and crash logs
+**/.terraform/*
+**/.terraform.lock.hcl
+**/*.tfstate
+**/*.tfstate.*
+**/crash.log
+
+# Terraform variable and override files
+**/*.tfvars
+**/override.tf
+**/override.tf.json
+**/*_override.tf
+**/*_override.tf.json
+
+# Terraform CLI configuration files (user-level, not always in repo)
+.terraformrc
+terraform.rc
