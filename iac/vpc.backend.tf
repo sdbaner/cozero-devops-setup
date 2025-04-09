@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "terraform-state-bucket-cozero"
-    key    = "terraform-vpc.tfstate"
+    key    = "terraform-ecr.tfstate"
     region = "eu-central-1"
     
     # enable state locking with dynamoDB
