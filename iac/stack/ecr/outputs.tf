@@ -1,10 +1,9 @@
 output "ecr_repository_name" {
   description = "Name of the ECR repository"
-  value       = aws_ecr_repository.ecr_repo.name
+  value       = module.ecr.repository_name
 }
 
 output "ecr_repository_url" {
   description = "URL of the ECR repository"
-  value       = aws_ecr_repository.ecr_repo.repository_url
+  value       = module.ecr.repository_url
 }
-
