@@ -25,13 +25,16 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
+        shell: bash # Use the Bash shell regardless of the os
         working-directory: iac
     steps:
-    #- name: Checkout repository
-    #  uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
       
-    - name: Call terraform binary
+    - name: Setup terraform binary
       uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_wrapper: false
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -40,10 +43,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-central-1
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_wrapper: false
+    #- name: Set up Terraform
+    #  uses: hashicorp/setup-terraform@v1
+    #  with:
+    #    terraform_wrapper: false
 
     - name: Terraform fmt
       id: fmt
