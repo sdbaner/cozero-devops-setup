@@ -26,10 +26,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform
+        working-directory: iac
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    #- name: Checkout repository
+    #  uses: actions/checkout@v2
+      
+    - name: Call terraform binary
+      uses: hashicorp/setup-terraform@v3
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -41,16 +44,26 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terraform_wrapper: true
+        terraform_wrapper: false
+
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
 
     - name: Initialize Terraform
-      run: terraform init
+      id: init
+      run: terraform init -input=false
 
     - name: Validate Terraform
-      run: terraform validate
+      id: validate
+      run: terraform validate -no-color
 
     - name: Terraform Plan
-      run: terraform plan
+      id: plan
+      run: terraform plan -no-color -input=false
+      continue-on-error: true
+      
 
     - name: Execute Terraform Action
       run: |
