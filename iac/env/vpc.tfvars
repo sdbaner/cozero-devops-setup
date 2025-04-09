@@ -1,7 +1,7 @@
 # Generic Variables
 region      = "eu-central-1"
 environment = "dev"
-
+project     = "cozero"
 
 
 # VPC Variables
