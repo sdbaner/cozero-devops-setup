@@ -38,7 +38,7 @@ jobs:
     defaults:
       run:
         shell: bash -leo pipefail {0} # Removed " --noprofile --norc " options from default bash
-        working-directory: ./iac/stack$/{{ inputs.stack }}
+        working-directory: ./iac/stack/${{ inputs.stack }}
 
     steps:
     - name: Checkout repository
