@@ -78,7 +78,7 @@ jobs:
     - name: Execute Terraform Action
       run: |
         if [ "${{ github.event.inputs.action }}" == "destroy" ]; then
-          terraform destroy -auto-approve -var-file=../../env/${{ github.event.inputs.environment }}.tfvars
+          terraform destroy -auto-approve -var-file=../../env/${{ github.event.inputs.stack }}.tfvars
         else
-          terraform apply -auto-approve -var-file=../../env/${{ github.event.inputs.environment }}.tfvars
+          terraform apply -auto-approve -var-file=../../env/${{ github.event.inputs.stack }}.tfvars
         fi
