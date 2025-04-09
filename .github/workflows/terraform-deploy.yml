@@ -86,3 +86,8 @@ jobs:
         else
           terraform apply -auto-approve -var-file=../../env/${{ github.event.inputs.stack }}.tfvars
         fi
+        
+    - name: Show Terraform State Backend
+      run: |
+        terraform providers
+        terraform show -json | jq '.values.root_module.resources[].address'
