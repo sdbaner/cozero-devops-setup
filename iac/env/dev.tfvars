@@ -1,4 +1,4 @@
-aws_region
+aws_region         = "eu-central-1"
 vpc                = "cozero-vpc"
 vpc_cidr           = "10.0.0.0/16"
 availability_zones = ["eu-central-1a", "eu-central-1b"]
