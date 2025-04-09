@@ -65,15 +65,10 @@ jobs:
       run: terraform fmt -check
       continue-on-error: true
 
-    - name: Setup Terraform Backend
-      id: backend
-      run: cat ../../${{ github.event.inputs.stack }}.backend.tf > backend.conf
-
     - name: Initialize Terraform
       id: init
-      run: terraform init -input=false -backend-config=backend.conf
+      run: terraform init -input=false
       
-
     - name: Validate Terraform
       id: validate
       run: terraform validate -no-color
