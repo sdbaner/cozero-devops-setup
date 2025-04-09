@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        shell: bash # Use the Bash shell regardless of the os
+        shell: bash -leo pipefail {0} # Removed " --noprofile --norc " options from default bash
         working-directory: ./iac
 
     steps:
