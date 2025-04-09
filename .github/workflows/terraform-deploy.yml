@@ -10,6 +10,10 @@ on:
   #    - main
   workflow_dispatch:
     inputs:
+      stack:
+        description: "Specify the component you want to deploy"
+        required: true
+        default: ecr
       action:
         description: "Specify the Terraform action: apply or destroy"
         required: true
@@ -34,7 +38,7 @@ jobs:
     defaults:
       run:
         shell: bash -leo pipefail {0} # Removed " --noprofile --norc " options from default bash
-        working-directory: ./iac
+        working-directory: ./iac/stack$/{{ inputs.stack }}
 
     steps:
     - name: Checkout repository
@@ -59,7 +63,7 @@ jobs:
 
     - name: Initialize Terraform
       id: init
-      run: terraform init -input=false
+      run: terraform init -input=false -backend-config=../../ecr.backend.tf
 
     - name: Validate Terraform
       id: validate
