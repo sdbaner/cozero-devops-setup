@@ -16,7 +16,9 @@
 
 #### Reference architecture diagram
 
+![ecs_fargate](https://github.com/user-attachments/assets/369129bd-2a0d-4818-8387-8ca47e5cce61)
 
+Image source : internet
 
 ### VPC with public and private subnets
 This is the widely used VPC setup for hosting containers and database, where the ECS and RDS reside within the private subnet with no direct access from the internet. The public subnet consists of Internet gateway to allow internet access , Application Load Balancer to host external facing services and NAT Gateway to enable outbound internet traffic from private subnet.
