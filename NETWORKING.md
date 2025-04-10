@@ -14,7 +14,9 @@ A simple and small flask application and RDS deployed on ECS
 7. Nat gateway in public subnet
 8. ALB
 9. ECS with fargate in private subnet
-10.RDS in private subnet
+10. RDS in private subnet
+11. Private Registry ECR
+12. Cloudwatch for monitoring, logging and alerting
 
 #### Reference architecture diagram
 
