@@ -126,15 +126,16 @@ resource "aws_ecs_service" "app" {
     assign_public_ip = true
   }
 
+  load_balancer {
+    target_group_arn = aws_lb_target_group.app.arn
+    container_name   = "app"
+    container_port   = 5000
+  }
+
+  depends_on = [aws_lb_listener.app]
+
   tags = {
     Name        = "${var.project}-ecs-service"
     Environment = var.environment
   }
-}
-
-# ALB
-load_balancer {
-  target_group_arn = aws_lb_target_group.app_tg.arn
-  container_name   = "${var.project}-container"
-  container_port   = 5000
 }
