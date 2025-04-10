@@ -12,7 +12,7 @@ A simple and small flask application and RDS deployed on ECS
 5. One Internet gateway
 6. Route table configurations 
 7. Nat gateway in public subnet
-8. ALB
+8. ALB to distribute traffic to ECS tasks.
 9. ECS with fargate in private subnet
 10. RDS in private subnet
 11. Private Registry ECR
