@@ -6,7 +6,6 @@ data "terraform_remote_state" "vpc" {
     key            = "shared/vpc/terraform.tfstate"
     region         = "eu-central-1"
     use_lockfile   = true  # Instead of deprecated `dynamodb_table`
-    #dynamodb_table = "terraform-lock-table"
   }
 }
 
@@ -122,8 +121,8 @@ resource "aws_ecs_service" "app" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = aws_subnet.public[*].id
-    security_groups  = [aws_security_group.ecs_tasks.id]
+    subnets          = data.terraform_remote_state.vpc.outputs.private_subnets
+    security_groups  = [aws_security_group.ecs_tasks.id]  
     assign_public_ip = true
   }
 
