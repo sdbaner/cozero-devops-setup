@@ -35,9 +35,12 @@ jobs:
         role-to-assume: arn:aws:iam::340752832652:role/github-cozero
         aws-region: eu-central-1
           
+
     - name: Login to Amazon ECR
       id: login-ecr
-      run: aws-actions/amazon-ecr-login@v2
+      uses: aws-actions/amazon-ecr-login@v2
+      with:
+        registry-uri: 340752832652.dkr.ecr.eu-central-1.amazonaws.com
 
     - name: Build, tag, and push image
       env:
