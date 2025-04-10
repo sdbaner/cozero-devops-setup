@@ -5,7 +5,8 @@ data "terraform_remote_state" "vpc" {
     bucket         = "cozero-terraform-state-bucket"
     key            = "shared/vpc/terraform.tfstate"
     region         = "eu-central-1"
-    dynamodb_table = "terraform-lock-table"
+    use_lockfile   = true  # Instead of deprecated `dynamodb_table`
+    #dynamodb_table = "terraform-lock-table"
   }
 }
 
