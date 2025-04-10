@@ -51,9 +51,6 @@ jobs:
           docker build -t $IMAGE_URI app/
           docker images
           echo "@@@@@@@@@@@@@@@@@@"
-          docker tag $ECR_REPO:$IMAGE_TAG $IMAGE_URI
-          
-          docker images
           docker push $IMAGE_URI
 
     - name: Output image URI
