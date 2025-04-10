@@ -1,3 +1,3 @@
 dbuser        = "postgres"
-dbpassword    = "postgres@123"
+dbpassword    = "MyPGrds12345" # no @allowed
 dbname        = "pg-cozero"
