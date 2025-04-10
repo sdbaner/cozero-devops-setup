@@ -44,7 +44,7 @@ jobs:
       run: |
           IMAGE_URI=$ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
           echo "Building image: $IMAGE_URI"
-          docker build -t $IMAGE_URI .
+          docker build -t $IMAGE_URI -f app/Dockerfile app/
           docker push $IMAGE_URI
 
     - name: Output image URI
