@@ -13,7 +13,13 @@ on:
       stack:
         description: "Specify the component you want to provision"
         required: true
-        default: ecr
+        default: rds
+        type: choice
+        options:
+          - rds
+          - ecr
+          - vpc
+          - ecr
       action:
         description: "Specify the Terraform action: apply or destroy"
         required: true
