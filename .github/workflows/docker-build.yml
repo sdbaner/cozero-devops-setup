@@ -50,6 +50,7 @@ jobs:
           echo "Building image: $IMAGE_URI"
           docker build -t $IMAGE_URI app/
           docker tag $ECR_REPO:$IMAGE_TAG $IMAGE_URI
+          echo "@@@@@@@@@@@@@@@@@@"
           docker images
           docker push $IMAGE_URI
 
