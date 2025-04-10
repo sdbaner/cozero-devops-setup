@@ -26,7 +26,7 @@ resource "aws_security_group" "alb_sg" {
 
 
 # create ALB for private subnet
-resource "aws_lb" "app_alb" {
+resource "aws_lb" "app" {
   name               = "${var.project}-alb"
   internal           = false
   load_balancer_type = "application"
@@ -39,7 +39,7 @@ resource "aws_lb" "app_alb" {
 }
 
 # target group
-resource "aws_lb_target_group" "app_tg" {
+resource "aws_lb_target_group" "app" {
   name        = "${var.project}-tg"
   port        = 5000                       
   protocol    = "HTTP"
@@ -63,7 +63,7 @@ resource "aws_lb_target_group" "app_tg" {
 
 
 # listener
-resource "aws_lb_listener" "app_listener" {
+resource "aws_lb_listener" "app" {
   load_balancer_arn = aws_lb.app_alb.arn
   port              = 80
   protocol          = "HTTP"
