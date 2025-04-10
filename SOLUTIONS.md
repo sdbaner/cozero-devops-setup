@@ -42,7 +42,7 @@ This DevOps setup automates the deployment of a simple hellow-world docker app u
 - [x]  Automated image clean-up using ECR lifecycle policies to remove old images and prevent unnecessary costs.
 - [x]  Logs from ECS tasks are sent to CloudWatch, enabling monitoring of application and container logs for security auditing and troubleshooting.
 - [ ]  Secure RDS password using KMS (TBD)
-
+- [ ]  Use a dedicated IAM role for infrastructure provisioning with only required privilege.
   
 
 
