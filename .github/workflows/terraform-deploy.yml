@@ -28,14 +28,6 @@ on:
         options:
           - approve
           - destroy
-      environment:
-        description: "Specify the environment"
-        required: true
-        default: "dev"
-        type: choice
-        options:
-          - dev
-          - prod
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
