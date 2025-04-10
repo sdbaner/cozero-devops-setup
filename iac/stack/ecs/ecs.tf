@@ -104,7 +104,6 @@ resource "aws_ecs_task_definition" "app" {
       }
     }
   ])
-
   tags = {
     Name        = "${var.project}-task-definition"
     Environment = var.environment
@@ -132,7 +131,11 @@ resource "aws_ecs_service" "app" {
     container_port   = 5000
   }
 
-  depends_on = [aws_lb_listener.app]
+  depends_on = [
+    aws_lb.app,
+    aws_lb_listener.app,
+    aws_lb_target_group.app
+  ]
 
   tags = {
     Name        = "${var.project}-ecs-service"
