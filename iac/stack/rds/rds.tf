@@ -72,6 +72,9 @@ resource "aws_db_instance" "postgresql" {
   parameter_group_name                = aws_db_parameter_group.postgresql.name
   multi_az                            = false # to save cost
   apply_immediately                   = true
+  final_snapshot_identifier           = "rds-pg-cluster-backup"
+  skip_final_snapshot                 = true
+
 }
 
 
