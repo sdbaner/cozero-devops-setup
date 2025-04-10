@@ -131,3 +131,10 @@ resource "aws_ecs_service" "app" {
     Environment = var.environment
   }
 }
+
+# ALB
+load_balancer {
+  target_group_arn = aws_lb_target_group.app_tg.arn
+  container_name   = "${var.project}-container"
+  container_port   = 5000
+}
