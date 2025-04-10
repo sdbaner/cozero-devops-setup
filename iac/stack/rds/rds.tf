@@ -49,7 +49,7 @@ resource "aws_security_group" "rds_sg" {
 # Postgres parameters
 resource "aws_db_parameter_group" "postgresql" {
   name   = "params"
-  family = "postgres14"
+  family = "postgres17"
 
   parameter {
     name  = "log_connections"
