@@ -162,7 +162,8 @@ resource "aws_ecs_service" "app" {
   depends_on = [
     aws_lb.app,
     aws_lb_listener.app,
-    aws_lb_target_group.app
+    aws_lb_target_group.app,
+    aws_ecs_task_definition.app
   ]
 
   tags = {
