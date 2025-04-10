@@ -67,7 +67,34 @@ resource "aws_iam_role" "ecs_task_execution_role" {
   })
 }
 
-# Attach the AWS managed policy for ECS task execution
+# Host execution Role
+data "aws_iam_policy_document" "host_execution_policy" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "host_execution_policy" {
+  policy = data.aws_iam_policy_document.host_execution_policy.json
+  name   = "fargate-ecr-link"
+}
+
+
+# Attach the AWS managed policy for ECS task/host execution
+resource "aws_iam_role_policy_attachment" "host_execution_role_attachment" {
+  policy_arn = aws_iam_policy.host_execution_policy.arn  
+  role       = aws_iam_role.ecs_task_execution_role.name
+}
+
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
   role       = aws_iam_role.ecs_task_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
@@ -118,11 +145,12 @@ resource "aws_ecs_service" "app" {
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = 1
   launch_type     = "FARGATE"
+  force_new_deployment = true
 
   network_configuration {
     subnets          = data.terraform_remote_state.vpc.outputs.private_subnets
     security_groups  = [aws_security_group.ecs_tasks.id]  
-    assign_public_ip = true
+    assign_public_ip = false
   }
 
   load_balancer {
