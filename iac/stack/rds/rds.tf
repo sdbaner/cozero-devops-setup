@@ -46,12 +46,22 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
+# Postgres parameters
+resource "aws_db_parameter_group" "postgresql" {
+  name   = "params"
+  family = "postgres14"
+
+  parameter {
+    name  = "log_connections"
+    value = "1"
+  }
+}
 
 # Create the RDS
 resource "aws_db_instance" "postgresql" {
   allocated_storage                   = 20
   engine                              = "postgres"
-  engine_version                      = "11.5"
+  engine_version                      = "14.1"
   instance_class                      = "db.t4g.micro"
   identifier                          = var.dbname
   username                            = var.dbuser
@@ -59,7 +69,7 @@ resource "aws_db_instance" "postgresql" {
   db_subnet_group_name                = aws_db_subnet_group.rds_subnet_group.name
   vpc_security_group_ids              = [aws_security_group.rds_sg.id]
   storage_encrypted                   = true
-  parameter_group_name                = aws_db_parameter_group.postgres.name
+  parameter_group_name                = aws_db_parameter_group.postgresql.name
   multi_az                            = false # to save cost
   apply_immediately                   = true
 }
