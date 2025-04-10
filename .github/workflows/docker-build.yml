@@ -32,7 +32,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        role-to-assume: arn:aws:iam::340752832652:user/ECRuser
+        role-to-assume: arn:aws:iam::340752832652:role/github-cozero
         aws-region: eu-central-1
           
     - name: Login to Amazon ECR
