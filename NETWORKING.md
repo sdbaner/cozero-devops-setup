@@ -1,6 +1,8 @@
 
 # Networking Considerations
 
+#### Assumption:
+A simple and small flask application and RDS deployed on ECS
 
 ## VPC Components
 1. VPC in eu-central region
@@ -38,4 +40,19 @@ This is the network interfaces for EKS nodes, ALB, and pods (via VPC CNI).
 ### Deploying ECS with launch type fargate
 Here, the compute instances are completely managed by AWS and fargate. Only the specs like CPU, memory, vpc, image need to be defined by the user. Services can be scaled on-demand. You pay per-second for the actual time your task runs.
 
- 
+
+ ### CIDR range considerations
+vpc_cidr  = "10.0.0.0/16"
+For simplicity, going with the default aws setting, "10.0.0.0/16" which 65,536 IPs, and can be used to expand multiple subnets in future.
+
+azs  = ["eu-central-1a", "eu-central-1b"]   
+Two availabilty zones are enough to provide high availabilty and fault toleration for a small and simple app.
+
+public_subnets = ["10.0.101.0/24","10.0.102.0/24"]   
+private_subnets = ["10.0.1.0/24","10.0.2.0/24"]        
+Each subnet is /24 which provides 256 IPs, which is more than enough for few ecs tasks, rds and internal communication.
+
+### Security considerations
+ALB SG: Allow inbound HTTP (80) from 0.0.0.0/0
+ECS SG: Allow inbound from ALB SG on port 5000 (Flask app)
+RDS SG: Allow inbound from ECS SG on port 5432 (PostgreSQL) 
