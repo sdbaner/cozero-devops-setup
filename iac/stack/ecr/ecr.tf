@@ -3,10 +3,7 @@ module "ecr" {
 
   repository_name = var.ecr_name
   repository_image_tag_mutability = "MUTABLE"
-  #image_scanning_configuration {
-  #  scan_on_push = true 
-  #}
-
+  repository_image_scan_on_push = true
   #repository_read_write_access_arns = ["arn:aws:iam::012345678901:role/terraform"]
   repository_lifecycle_policy = jsonencode({
     rules = [
