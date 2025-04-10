@@ -64,12 +64,12 @@ resource "aws_lb_target_group" "app" {
 
 # listener
 resource "aws_lb_listener" "app" {
-  load_balancer_arn = aws_lb.app_alb.arn
+  load_balancer_arn = aws_lb.app.arn
   port              = 80
   protocol          = "HTTP"
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.app_tg.arn
+    target_group_arn = aws_lb_target_group.app.arn
   }
 }
